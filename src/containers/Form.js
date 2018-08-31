@@ -28,7 +28,7 @@ class Form extends Component {
   
   static propTypes = {
     title: PropTypes.string.isRequired,
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
   };
 
   handleChange = name => event => {

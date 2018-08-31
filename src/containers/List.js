@@ -22,6 +22,7 @@ const List = ({ classes, ...props }) => (
         data={props.data}
         onDelete={props.onDelete}
         onMove={props.onMove}
+        onEdit={props.onEdit}
       />
     ) : 'Não existem tarefas cadastradas.'}
   </div>
@@ -30,7 +31,8 @@ const List = ({ classes, ...props }) => (
 List.defaultProps = {
   data: [],
   onMove: () => {},
-  onDelete: () => {}
+  onDelete: () => {},
+  onEdit: () => {}
 };
 
 List.propTypes = {
@@ -38,7 +40,8 @@ List.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   classes: PropTypes.object.isRequired,
   onMove: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func
 };
 
 export default withStyles(styles)(List);

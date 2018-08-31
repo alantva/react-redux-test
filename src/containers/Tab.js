@@ -29,13 +29,15 @@ class CommonTab extends Component {
   static defaultProps = {
     data: [],
     onMove: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    onEdit: () => {}
   };
 
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
     onDelete: PropTypes.func,
     onMove: PropTypes.func,
+    onEdit: PropTypes.func,
     classes: PropTypes.object.isRequired
   };
 
@@ -59,6 +61,7 @@ class CommonTab extends Component {
           data={data.filter(d => d.complete === !!value)}
           onMove={this.props.onMove}
           onDelete={this.props.onDelete}
+          onEdit={this.props.onEdit}
         />
       </div>
     );

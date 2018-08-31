@@ -6,6 +6,7 @@ import TabContainer from './Tab';
 import FormContainer from './Form';
 
 const INITIAL_STATE = {
+  editId: null,
   data: []
 };
 
@@ -43,16 +44,25 @@ class Manager extends Component {
       data: state.data.map(d => idArray.includes(d.id) ? { ...d, complete: !d.complete } : d)
     }));
   };
+
+  handleEdit = id => {
+    this.setState({ editId: id });
+  };
   
   render() {
     const { classes } = this.props;
     return(
       <Paper elevation={4} className={classes.manager}>
-        <FormContainer title="Cadastro de Tarefas" onSubmit={this.handleAdd} />
+        <FormContainer
+          editId={this.state.editId}
+          title="Cadastro de Tarefas"
+          onSubmit={this.handleAdd}
+        />
         <TabContainer
           data={this.state.data}
           onDelete={this.handleDelete}
           onMove={this.handleMove}
+          onEdit={this.handleEdit}
         />
       </Paper>
     );

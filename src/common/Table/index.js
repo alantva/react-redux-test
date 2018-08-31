@@ -38,7 +38,8 @@ class CommonTable extends React.Component {
   static defaultProps = {
     data: [],
     onMove: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    onEdit: () => {}
   };
 
   static propTypes = {
@@ -46,7 +47,8 @@ class CommonTable extends React.Component {
     data: PropTypes.arrayOf(PropTypes.object),
     classes: PropTypes.object.isRequired,
     onMove: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    onEdit: PropTypes.func
   };
 
   handleSelectAllClick = event => {
@@ -99,7 +101,7 @@ class CommonTable extends React.Component {
 
   handleEditClick = (event, id) => {
     event.stopPropagation();
-    console.log('edit', id);
+    this.setState({ selected: [] }, () => this.props.onEdit(id));
   };
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
