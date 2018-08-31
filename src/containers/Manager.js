@@ -6,7 +6,7 @@ import Form from './Form';
 import List from './List';
 
 const INITIAL_STATE = {
-  list: []
+  data: []
 };
 
 const styles = theme => ({
@@ -29,9 +29,9 @@ class Manager extends Component {
   static propTypes = { classes: PropTypes.object.isRequired };
 
   add = ({ description }) => {
-    const { list } = this.state;
-    list.push({ id: list.length + 1, description });
-    this.setState({ list });
+    const { data } = this.state;
+    data.push({ id: data.length + 1, description });
+    this.setState({ data });
   }
   
   render() {
@@ -39,7 +39,7 @@ class Manager extends Component {
     return(
       <Paper elevation={4} className={classes.manager}>
         <Form title="Cadastro de Tarefas" onSubmit={this.add} />
-        <List title="Lista de Tarefas" />
+        <List title="Lista de Tarefas" data={this.state.data} />
       </Paper>
     );
   }
