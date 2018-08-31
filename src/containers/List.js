@@ -17,13 +17,19 @@ const styles = theme => ({
 const List = ({ classes, ...props }) => (
   <div className={classes.list}>
     {props.data && props.data.length ? (
-      <CommonTable title={props.title} data={props.data} onDelete={props.onDelete} />
+      <CommonTable
+        title={props.title}
+        data={props.data}
+        onDelete={props.onDelete}
+        onMove={props.onMove}
+      />
     ) : 'Não existem tarefas cadastradas.'}
   </div>
 );
 
 List.defaultProps = {
   data: [],
+  onMove: () => {},
   onDelete: () => {}
 };
 
@@ -31,6 +37,7 @@ List.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   classes: PropTypes.object.isRequired,
+  onMove: PropTypes.func,
   onDelete: PropTypes.func
 };
 

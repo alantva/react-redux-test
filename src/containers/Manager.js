@@ -37,13 +37,23 @@ class Manager extends Component {
   handleDelete = idArray => {
     this.setState(state => ({ data: state.data.filter(d => !idArray.includes(d.id)) }));
   };
+
+  handleMove = idArray => {
+    this.setState(state => ({
+      data: state.data.map(d => idArray.includes(d.id) ? { ...d, complete: !d.complete } : d)
+    }));
+  };
   
   render() {
     const { classes } = this.props;
     return(
       <Paper elevation={4} className={classes.manager}>
         <FormContainer title="Cadastro de Tarefas" onSubmit={this.handleAdd} />
-        <TabContainer data={this.state.data} onDelete={this.handleDelete} />
+        <TabContainer
+          data={this.state.data}
+          onDelete={this.handleDelete}
+          onMove={this.handleMove}
+        />
       </Paper>
     );
   }

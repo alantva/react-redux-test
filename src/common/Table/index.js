@@ -31,6 +31,7 @@ class CommonTable extends React.Component {
 
   static defaultProps = {
     data: [],
+    onMove: () => {},
     onDelete: () => {}
   };
 
@@ -38,6 +39,7 @@ class CommonTable extends React.Component {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
     classes: PropTypes.object.isRequired,
+    onMove: PropTypes.func,
     onDelete: PropTypes.func
   };
 
@@ -79,10 +81,15 @@ class CommonTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  handleMoveClick = () => {
+    const { selected } = this.state;
+    this.setState({ selected: [] }, () => this.props.onMove(selected));
+  };
+
   handleDeleteClick = () => {
     const { selected } = this.state;
     this.setState({ selected: [] }, () => this.props.onDelete(selected));
-  }
+  };
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
@@ -96,6 +103,7 @@ class CommonTable extends React.Component {
         <TableToolbar
           title={title}
           numSelected={selected.length} 
+          onMoveClick={this.handleMoveClick}
           onDeleteClick={this.handleDeleteClick}
         />
         <div className={classes.tableWrapper}>
