@@ -132,11 +132,13 @@ class CommonTable extends React.Component {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'Previous Page',
+            'aria-label': 'Anterior',
           }}
           nextIconButtonProps={{
-            'aria-label': 'Next Page',
+            'aria-label': 'Próximo',
           }}
+          labelDisplayedRows={({ from, to, count }) => `Exibindo ${from}-${to} de ${count} tarefa(s)`}
+          labelRowsPerPage="Linhas por pagina:"
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />

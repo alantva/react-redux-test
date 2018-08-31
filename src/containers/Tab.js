@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,7 +23,7 @@ const styles = theme => ({
   }
 });
 
-class CommonTab extends React.Component {
+class CommonTab extends Component {
   state = INITIAL_STATE;
 
   static defaultProps = {
@@ -42,16 +42,15 @@ class CommonTab extends React.Component {
   render() {
     const { classes, data } = this.props;
     const { value } = this.state;
-
     return (
       <div className={classes.tab}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
+            <Tab label="Pendentes" />
             <Tab label="Completas" />
-            <Tab label="Incompletas" />
           </Tabs>
         </AppBar>
-        <ListContainer title="Lista de Tarefas" data={data.filter(d => d.complete === !value)} />
+        <ListContainer title="Lista de Tarefas" data={data.filter(d => d.complete === !!value)} />
       </div>
     );
   }
