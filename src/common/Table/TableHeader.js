@@ -15,7 +15,6 @@ const TableHeader = ({ rowCount, numSelected, ...props }) => (
           onChange={props.onSelectAllClick}
         />
       </TableCell>
-      <TableCell numeric padding="dense" />
       <TableCell padding="dense">Tarefa</TableCell>
     </TableRow>
   </TableHead>

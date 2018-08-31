@@ -54,6 +54,7 @@ class Form extends Component {
           label="Descrição"
           error={this.state.descriptionError}
           value={this.state.description}
+          rows={5}
           onChange={this.handleChange}
         />
         <CommonButton label="Adicionar" onClick={this.handleSubmit} />

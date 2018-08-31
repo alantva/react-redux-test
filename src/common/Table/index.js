@@ -7,13 +7,19 @@ import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 import TableToolbar from './TableToolbar';
 import TableHeader from './TableHeader';
 
 const styles = {
   tableWrapper: {
     overflowX: 'hidden',
+    maxWidth: 550,
+    wordBreak: 'break-word'
   },
+  checkbox: {
+    width: 44
+  }
 };
 
 class CommonTable extends React.Component {
@@ -103,11 +109,12 @@ class CommonTable extends React.Component {
                       key={n.id}
                       selected={isSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="checkbox" className={classes.checkbox}>
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell>{n.id}</TableCell>
-                      <TableCell>{n.description}</TableCell>
+                      <TableCell>
+                        <Typography component="p">{n.description}</Typography>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
