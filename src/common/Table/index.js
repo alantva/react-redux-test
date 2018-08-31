@@ -79,10 +79,14 @@ class CommonTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  handleMoveClick = () => {
+    console.log('move');
+  };
+
   handleDeleteClick = () => {
     const { selected } = this.state;
     this.setState({ selected: [] }, () => this.props.onDelete(selected));
-  }
+  };
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
@@ -96,6 +100,7 @@ class CommonTable extends React.Component {
         <TableToolbar
           title={title}
           numSelected={selected.length} 
+          onMoveClick={this.handleMoveClick}
           onDeleteClick={this.handleDeleteClick}
         />
         <div className={classes.tableWrapper}>

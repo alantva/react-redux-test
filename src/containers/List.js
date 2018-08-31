@@ -17,7 +17,11 @@ const styles = theme => ({
 const List = ({ classes, ...props }) => (
   <div className={classes.list}>
     {props.data && props.data.length ? (
-      <CommonTable title={props.title} data={props.data} onDelete={props.onDelete} />
+      <CommonTable
+        title={props.title}
+        data={props.data}
+        onDelete={props.onDelete}
+      />
     ) : 'Não existem tarefas cadastradas.'}
   </div>
 );

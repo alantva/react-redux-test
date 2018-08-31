@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
@@ -26,11 +27,13 @@ const styles = theme => ({
     flex: '1 1 100%'
   },
   actions: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    flexDirection: 'row'
   },
   title: {
     flex: '0 0 auto'
-  },
+  }
 });
 
 const TableToolbar = ({ classes, ...props }) => (
@@ -45,15 +48,20 @@ const TableToolbar = ({ classes, ...props }) => (
       </h3>
     </div>
     <div className={classes.spacer} />
-    <div className={classes.actions}>
-      {props.numSelected > 0 ? (
+    {props.numSelected > 0 ? (
+      <div className={classes.actions}>
+        <Tooltip title="Mover">
+          <IconButton aria-label="Move" onClick={props.onMoveClick}>
+            <SwapHorizIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Deletar">
           <IconButton aria-label="Delete" onClick={props.onDeleteClick}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-      ) : null}
-    </div>
+      </div>
+    ) : null}
   </Toolbar>
 );
 
@@ -61,6 +69,7 @@ TableToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
+  onMoveClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired
 };
 
