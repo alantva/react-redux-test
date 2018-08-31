@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TabContainer from './Tab';
 import FormContainer from './Form';
+import FormEditContainer from './FormEdit';
 
 const INITIAL_STATE = {
   editId: null,
@@ -48,18 +49,38 @@ class Manager extends Component {
   handleEdit = id => {
     this.setState({ editId: id });
   };
+
+  handleChangeDescription = description => {
+    this.setState(state => ({
+      editId: null,
+      data: state.data.map(d => d.id === state.editId ? { ...d, description } : d)
+    }));
+  };
+
+  handleCancelChange = () => {
+    this.setState({ editId: null });
+  };
   
   render() {
     const { classes } = this.props;
+    const { editId } = this.state;
     return(
       <Paper elevation={4} className={classes.manager}>
-        <FormContainer
-          editId={this.state.editId}
-          title="Cadastro de Tarefas"
-          onSubmit={this.handleAdd}
-        />
+        {editId
+          ? <FormEditContainer
+              title="Editar Tarefa"
+              description={this.state.data.find(d => d.id === editId).description}
+              onSubmit={this.handleChangeDescription}
+              onCancel={this.handleCancelChange}
+            />
+          : <FormContainer
+              title="Cadastro de Tarefas"
+              onSubmit={this.handleAdd}
+            />
+        }
         <TabContainer
           data={this.state.data}
+          isEditing={!!editId}
           onDelete={this.handleDelete}
           onMove={this.handleMove}
           onEdit={this.handleEdit}

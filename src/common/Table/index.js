@@ -37,6 +37,7 @@ class CommonTable extends React.Component {
 
   static defaultProps = {
     data: [],
+    isEditing: false,
     onMove: () => {},
     onDelete: () => {},
     onEdit: () => {}
@@ -45,6 +46,7 @@ class CommonTable extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
+    isEditing: PropTypes.bool,
     classes: PropTypes.object.isRequired,
     onMove: PropTypes.func,
     onDelete: PropTypes.func,
@@ -107,7 +109,7 @@ class CommonTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, title, data } = this.props;
+    const { classes, title, data, isEditing } = this.props;
     const { selected, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
@@ -148,11 +150,14 @@ class CommonTable extends React.Component {
                         <Typography component="p">{n.description}</Typography>
                       </TableCell>
                       <TableCell className={classes.actions}>
-                        <Tooltip title="Editar">
-                          <IconButton aria-label="Edit" onClick={event => this.handleEditClick(event, n.id)}>
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
+                        {!isEditing
+                          ? <Tooltip title="Editar">
+                              <IconButton aria-label="Edit" onClick={event => this.handleEditClick(event, n.id)}>
+                                <EditIcon />
+                              </IconButton>
+                            </Tooltip>
+                          : ''
+                        }
                       </TableCell>
                     </TableRow>
                   );

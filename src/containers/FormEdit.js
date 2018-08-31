@@ -23,12 +23,13 @@ const styles = theme => ({
   }
 });
 
-class Form extends Component {
+class FormEdit extends Component {
   state = INITIAL_STATE;
   
   static propTypes = {
     title: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired
   };
 
@@ -39,14 +40,18 @@ class Form extends Component {
   handleSubmit = () => {
     const { description } = this.state;
     if (description && description.length) {
-      this.setState({ description: '' }, () => this.props.onSubmit({ description }));
+      this.props.onSubmit(description);
     } else {
-      this.setState({ descriptionError: 'Preenchimento obrigatório!' });
+      this.setState({ descriptionError: 'Não pode estar vazio!' });
     }
   };
+
+  componentDidMount() {
+    this.setState({ description: this.props.description });
+  }
   
   render() {
-    const { classes, title } = this.props;
+    const { classes, title, description } = this.props;
     return(
       <div className={classes.form}>
         <h3>{title}</h3>
@@ -58,10 +63,15 @@ class Form extends Component {
           rows={5}
           onChange={this.handleChange}
         />
-        <CommonButton label="Adicionar" onClick={this.handleSubmit} />
+        <CommonButton
+          label="Salvar"
+          disabled={description === this.state.description}
+          onClick={this.handleSubmit}
+        />
+        <CommonButton label="Cancelar" color="default" onClick={this.props.onCancel} />
       </div>
     );
   }
 };
 
-export default withStyles(styles)(Form);
+export default withStyles(styles)(FormEdit);
