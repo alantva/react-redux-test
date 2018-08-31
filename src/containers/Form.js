@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 };
 
 const styles = theme => ({
-  container: {
+  form: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
@@ -47,7 +47,7 @@ class Form extends Component {
   render() {
     const { classes, title } = this.props;
     return(
-      <div className={classes.container}>
+      <div className={classes.form}>
         <h3>{title}</h3>
         <CommonField
           name="description"
