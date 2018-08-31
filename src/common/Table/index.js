@@ -31,6 +31,7 @@ class CommonTable extends React.Component {
 
   static defaultProps = {
     data: [],
+    onMove: () => {},
     onDelete: () => {}
   };
 
@@ -38,6 +39,7 @@ class CommonTable extends React.Component {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
     classes: PropTypes.object.isRequired,
+    onMove: PropTypes.func,
     onDelete: PropTypes.func
   };
 
@@ -80,7 +82,8 @@ class CommonTable extends React.Component {
   };
 
   handleMoveClick = () => {
-    console.log('move');
+    const { selected } = this.state;
+    this.setState({ selected: [] }, () => this.props.onMove(selected));
   };
 
   handleDeleteClick = () => {

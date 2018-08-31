@@ -28,12 +28,14 @@ class CommonTab extends Component {
 
   static defaultProps = {
     data: [],
+    onMove: () => {},
     onDelete: () => {}
   };
 
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
     onDelete: PropTypes.func,
+    onMove: PropTypes.func,
     classes: PropTypes.object.isRequired
   };
 
@@ -55,6 +57,7 @@ class CommonTab extends Component {
         <ListContainer
           title="Lista de Tarefas"
           data={data.filter(d => d.complete === !!value)}
+          onMove={this.props.onMove}
           onDelete={this.props.onDelete}
         />
       </div>
