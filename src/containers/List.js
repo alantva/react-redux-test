@@ -10,12 +10,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    margin: theme.spacing.unit * 2,
-    padding: theme.spacing.unit * 2,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: theme.palette.primary.main,
-    color: theme.palette.primary.main
+    padding: theme.spacing.unit * 2
   }
 });
 

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Form from './Form';
-import List from './List';
+import TabContainer from './Tab';
+import FormContainer from './Form';
 
 const INITIAL_STATE = {
   data: []
@@ -38,8 +38,8 @@ class Manager extends Component {
     const { classes } = this.props;
     return(
       <Paper elevation={4} className={classes.manager}>
-        <Form title="Cadastro de Tarefas" onSubmit={this.add} />
-        <List title="Lista de Tarefas" data={this.state.data} />
+        <FormContainer title="Cadastro de Tarefas" onSubmit={this.add} />
+        <TabContainer data={this.state.data} />
       </Paper>
     );
   }
