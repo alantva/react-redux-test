@@ -33,22 +33,22 @@ const styles = theme => ({
   },
 });
 
-const TableToolbar = ({ title, numSelected, classes }) => (
+const TableToolbar = ({ classes, ...props }) => (
   <Toolbar
     className={classNames(classes.root, {
-      [classes.highlight]: numSelected > 0,
+      [classes.highlight]: props.numSelected > 0,
     })}
   >
     <div className={classes.title}>
       <h3>
-        {numSelected > 0 ? `${numSelected} tarefa(s) selecionada(s)` : title}
+        {props.numSelected > 0 ? `${props.numSelected} tarefa(s) selecionada(s)` : props.title}
       </h3>
     </div>
     <div className={classes.spacer} />
     <div className={classes.actions}>
-      {numSelected > 0 ? (
+      {props.numSelected > 0 ? (
         <Tooltip title="Deletar">
-          <IconButton aria-label="Delete">
+          <IconButton aria-label="Delete" onClick={props.onDeleteClick}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -61,6 +61,7 @@ TableToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
+  onDeleteClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(TableToolbar);

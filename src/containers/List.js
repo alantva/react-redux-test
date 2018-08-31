@@ -17,19 +17,21 @@ const styles = theme => ({
 const List = ({ classes, ...props }) => (
   <div className={classes.list}>
     {props.data && props.data.length ? (
-      <CommonTable title={props.title} data={props.data} />
+      <CommonTable title={props.title} data={props.data} onDelete={props.onDelete} />
     ) : 'Não existem tarefas cadastradas.'}
   </div>
 );
 
 List.defaultProps = {
-  data: []
+  data: [],
+  onDelete: () => {}
 };
 
 List.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   classes: PropTypes.object.isRequired,
+  onDelete: PropTypes.func
 };
 
 export default withStyles(styles)(List);

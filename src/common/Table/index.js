@@ -30,13 +30,15 @@ class CommonTable extends React.Component {
   };
 
   static defaultProps = {
-    data: []
+    data: [],
+    onDelete: () => {}
   };
 
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
     classes: PropTypes.object.isRequired,
+    onDelete: PropTypes.func
   };
 
   handleSelectAllClick = event => {
@@ -77,6 +79,11 @@ class CommonTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  handleDeleteClick = () => {
+    const { selected } = this.state;
+    this.setState({ selected: [] }, () => this.props.onDelete(selected));
+  }
+
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
@@ -86,7 +93,11 @@ class CommonTable extends React.Component {
 
     return (
       <div>
-        <TableToolbar title={title} numSelected={selected.length} />
+        <TableToolbar
+          title={title}
+          numSelected={selected.length} 
+          onDeleteClick={this.handleDeleteClick}
+        />
         <div className={classes.tableWrapper}>
           <Table aria-labelledby="tableTitle">
             <TableHeader

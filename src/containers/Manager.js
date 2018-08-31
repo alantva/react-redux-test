@@ -28,18 +28,22 @@ class Manager extends Component {
   
   static propTypes = { classes: PropTypes.object.isRequired };
 
-  add = ({ description }) => {
+  handleAdd = ({ description }) => {
     const { data } = this.state;
     data.push({ id: data.length + 1, description, complete: false });
     this.setState({ data });
-  }
+  };
+
+  handleDelete = idArray => {
+    this.setState(state => ({ data: state.data.filter(d => !idArray.includes(d.id)) }));
+  };
   
   render() {
     const { classes } = this.props;
     return(
       <Paper elevation={4} className={classes.manager}>
-        <FormContainer title="Cadastro de Tarefas" onSubmit={this.add} />
-        <TabContainer data={this.state.data} />
+        <FormContainer title="Cadastro de Tarefas" onSubmit={this.handleAdd} />
+        <TabContainer data={this.state.data} onDelete={this.handleDelete} />
       </Paper>
     );
   }
