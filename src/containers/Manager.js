@@ -30,7 +30,7 @@ class Manager extends Component {
 
   add = ({ description }) => {
     const { data } = this.state;
-    data.push({ id: data.length + 1, description });
+    data.push({ id: data.length + 1, description, complete: false });
     this.setState({ data });
   }
   
