@@ -28,14 +28,18 @@ class CommonTab extends Component {
 
   static defaultProps = {
     data: [],
+    isEditing: false,
     onMove: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    onEdit: () => {}
   };
 
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
+    isEditing: PropTypes.bool,
     onDelete: PropTypes.func,
     onMove: PropTypes.func,
+    onEdit: PropTypes.func,
     classes: PropTypes.object.isRequired
   };
 
@@ -44,7 +48,7 @@ class CommonTab extends Component {
   };
 
   render() {
-    const { classes, data } = this.props;
+    const { classes, data, isEditing } = this.props;
     const { value } = this.state;
     return (
       <div className={classes.tab}>
@@ -57,8 +61,10 @@ class CommonTab extends Component {
         <ListContainer
           title="Lista de Tarefas"
           data={data.filter(d => d.complete === !!value)}
+          isEditing={isEditing}
           onMove={this.props.onMove}
           onDelete={this.props.onDelete}
+          onEdit={this.props.onEdit}
         />
       </div>
     );

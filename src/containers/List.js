@@ -20,8 +20,10 @@ const List = ({ classes, ...props }) => (
       <CommonTable
         title={props.title}
         data={props.data}
+        isEditing={props.isEditing}
         onDelete={props.onDelete}
         onMove={props.onMove}
+        onEdit={props.onEdit}
       />
     ) : 'Não existem tarefas cadastradas.'}
   </div>
@@ -29,16 +31,20 @@ const List = ({ classes, ...props }) => (
 
 List.defaultProps = {
   data: [],
+  isEditing: false,
   onMove: () => {},
-  onDelete: () => {}
+  onDelete: () => {},
+  onEdit: () => {}
 };
 
 List.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
+  isEditing: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   onMove: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func
 };
 
 export default withStyles(styles)(List);

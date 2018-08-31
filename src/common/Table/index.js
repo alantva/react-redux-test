@@ -8,6 +8,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import EditIcon from '@material-ui/icons/Edit';
 import TableToolbar from './TableToolbar';
 import TableHeader from './TableHeader';
 
@@ -19,6 +22,9 @@ const styles = {
   },
   checkbox: {
     width: 44
+  },
+  actions: {
+    width: 50
   }
 };
 
@@ -31,16 +37,20 @@ class CommonTable extends React.Component {
 
   static defaultProps = {
     data: [],
+    isEditing: false,
     onMove: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    onEdit: () => {}
   };
 
   static propTypes = {
     title: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object),
+    isEditing: PropTypes.bool,
     classes: PropTypes.object.isRequired,
     onMove: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    onEdit: PropTypes.func
   };
 
   handleSelectAllClick = event => {
@@ -91,10 +101,15 @@ class CommonTable extends React.Component {
     this.setState({ selected: [] }, () => this.props.onDelete(selected));
   };
 
+  handleEditClick = (event, id) => {
+    event.stopPropagation();
+    this.setState({ selected: [] }, () => this.props.onEdit(id));
+  };
+
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, title, data } = this.props;
+    const { classes, title, data, isEditing } = this.props;
     const { selected, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
@@ -133,6 +148,16 @@ class CommonTable extends React.Component {
                       </TableCell>
                       <TableCell>
                         <Typography component="p">{n.description}</Typography>
+                      </TableCell>
+                      <TableCell className={classes.actions}>
+                        {!isEditing
+                          ? <Tooltip title="Editar">
+                              <IconButton aria-label="Edit" onClick={event => this.handleEditClick(event, n.id)}>
+                                <EditIcon />
+                              </IconButton>
+                            </Tooltip>
+                          : ''
+                        }
                       </TableCell>
                     </TableRow>
                   );

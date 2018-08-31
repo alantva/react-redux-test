@@ -16,6 +16,7 @@ const TableHeader = ({ rowCount, numSelected, ...props }) => (
         />
       </TableCell>
       <TableCell padding="dense">Tarefa</TableCell>
+      <TableCell />
     </TableRow>
   </TableHead>
 );
