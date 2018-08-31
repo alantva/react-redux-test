@@ -16,15 +16,22 @@ const CommonField = ({ classes, ...props }) => (
     id={props.name}
     label={props.label}
     className={classes.textField}
+    error={!!props.error}
+    helperText={props.error}
     value={props.value}
     onChange={props.onChange(props.name)}
     margin="normal"
   />
 );
 
+CommonField.defaultProps = {
+  error: null
+};
+
 CommonField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  error: PropTypes.string,
   value: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
