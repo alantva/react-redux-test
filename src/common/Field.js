@@ -19,6 +19,8 @@ const CommonField = ({ classes, ...props }) => (
     error={!!props.error}
     helperText={props.error}
     value={props.value}
+    multiline={!!props.rows}
+    rows={props.rows}
     onChange={props.onChange(props.name)}
     margin="normal"
   />
