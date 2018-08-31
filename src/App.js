@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
+import Manager from './containers/Manager';
 
 const theme = createMuiTheme({
   palette: {
@@ -52,7 +53,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.appRoot} style={sizes}>
-          Hello
+          <Manager />
         </div>
       </MuiThemeProvider>
     );
